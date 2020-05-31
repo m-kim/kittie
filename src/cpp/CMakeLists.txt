@@ -10,7 +10,7 @@ endif()
 set(lib_objects ${CMAKE_CURRENT_SOURCE_DIR}/kittie.cpp)
 add_library(kittie ${lib_objects})
 
-target_link_libraries(kittie PRIVATE adios2::adios2 yaml::cpp)
+target_link_libraries(kittie PRIVATE adios2::adios2 yaml-cpp)
 target_include_directories(kittie 
 	PUBLIC 
 	$<BUILD_INTERFACE:${YAML_INCLUDE_DIRS}>
@@ -54,3 +54,9 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kittieConfigVersion.cmake
     DESTINATION ${INSTALL_CONFIGDIR}
 )
+
+export(EXPORT kittie-targets
+    FILE ${CMAKE_CURRENT_BINARY_DIR}/kittieUtilsTargets.cmake
+    NAMESPACE kittieUtils::)
+
+export(PACKAGE kittie)
